@@ -1,0 +1,84 @@
+@import './variables.scss';
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 15px;
+}
+
+body {
+    margin: 0;
+    color: $text-color;
+    line-height: $line-height;
+    font-family: sans-serif;
+    background: $background-light;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.15s linear;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+button {
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+}
+
+.container {
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        margin-left: $sidebar-width;
+    }
+}
+
+.active {
+    &::after {
+        content: '';
+        width: 0.4rem;
+        height: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: calc(0px - 2.5rem);
+        background: $main-color;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    i {
+        color: $main-color;
+    }
+}
+
+.circle-img {
+    border-radius: 50%;
+}
+
+// NOTE: TEMPORARY BTN
+.menu-btn {
+    outline: none;
+    font-size: 2rem;
+    color: rgb(116, 116, 116);
+}
+
+@media (min-width: 768px) {
+    .menu-btn {
+        display: none;
+    }
+}
+// ===
