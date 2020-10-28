@@ -1,0 +1,11 @@
+.menu-btn {
+    outline: none;
+    font-size: 2.3rem;
+    color: rgb(116, 116, 116);
+}
+
+@media (min-width: 768px) {
+    .menu-btn {
+        display: none;
+    }
+}

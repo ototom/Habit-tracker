@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import { Switch, Route } from 'react-router-dom';
+import Habits from './pages/Habits';
+import { sidebarContext } from './context/sidebar-context';
 
 function App() {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -14,24 +16,21 @@ function App() {
                 closeSidebarHandler={closeSidebarHandler}
                 isSidebarOpen={isSidebarOpen}
             />
-            <main className='container'>
-                <Switch>
-                    <Route exact path='/'>
-                        <header>
-                            {!isSidebarOpen && (
-                                <button
-                                    className='menu-btn'
-                                    onClick={openSidebarHandler}
-                                >
-                                    <i className='fas fa-bars'></i>
-                                </button>
-                            )}
-                            <h1>Page title</h1>
-                        </header>
-                        Content
-                    </Route>
-                </Switch>
-            </main>
+            <sidebarContext.Provider
+                value={{
+                    isSidebarOpen,
+                    openSidebarHandler,
+                    closeSidebarHandler,
+                }}
+            >
+                <main className='container'>
+                    <Switch>
+                        <Route exact path='/'>
+                            <Habits />
+                        </Route>
+                    </Switch>
+                </main>
+            </sidebarContext.Provider>
         </>
     );
 }

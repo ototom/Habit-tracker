@@ -36,13 +36,34 @@ button {
     background: transparent;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+}
+
 .container {
-    padding: 20px;
+    padding: 2rem;
 }
 
 @media (min-width: 768px) {
     .container {
         margin-left: $sidebar-width;
+    }
+}
+
+.content {
+    &__header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5rem;
+
+        h1 {
+            font-size: 3rem;
+            margin-left: 1rem;
+        }
     }
 }
 
@@ -68,17 +89,3 @@ button {
 .circle-img {
     border-radius: 50%;
 }
-
-// NOTE: TEMPORARY BTN
-.menu-btn {
-    outline: none;
-    font-size: 2rem;
-    color: rgb(116, 116, 116);
-}
-
-@media (min-width: 768px) {
-    .menu-btn {
-        display: none;
-    }
-}
-// ===

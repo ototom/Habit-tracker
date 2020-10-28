@@ -1,0 +1,20 @@
+.datepicker {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+
+    &__date {
+        margin: 0 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .datepicker {
+        padding: 1rem 1.5rem;
+        border: 1px solid rgb(218, 218, 218);
+        border-radius: 40px;
+        margin-bottom: 0;
+        margin-left: auto;
+    }
+}

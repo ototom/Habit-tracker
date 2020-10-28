@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+import { useWindowWidth } from '../../hooks/use-window-width';
 import Backdrop from '../shared/Backdrop/Backdrop';
+import Datepicker from '../shared/Datepicker/Datepicker';
 import './Sidebar.scss';
 
 const Sidebar = ({ isSidebarOpen, closeSidebarHandler }) => {
+    const { width } = useWindowWidth();
     const history = useHistory();
 
     useEffect(() => {
@@ -23,6 +26,7 @@ const Sidebar = ({ isSidebarOpen, closeSidebarHandler }) => {
                     />
                     Hello, Tom!
                 </section>
+                {width < 768 && <Datepicker />}
                 <nav className='sidebar__section'>
                     <h3>Account</h3>
                     <ul>
