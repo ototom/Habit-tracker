@@ -7,29 +7,22 @@ const Habit = () => {
 
     return (
         <section className='habit'>
-            <header className='habit__header'>
-                <h2>Habit name</h2>
-            </header>
-            <div className='habit__details'>
-                <button
-                    onClick={() => {
-                        setIsChecked((prev) => !prev);
-                    }}
-                    className={`${isChecked ? 'is-checked' : ''}`}
-                >
-                    {isChecked ? (
-                        <i className='fas fa-calendar-check'></i>
-                    ) : (
-                        <i className='fas fa-calendar'></i>
-                    )}
-                </button>
-                <span className='habit__counter'>13/30</span>
+            <button
+                className='habit__checkbox-btn'
+                onClick={() => {
+                    setIsChecked((prev) => !prev);
+                }}
+            >
+                <span
+                    className={`habit__check-icon ${
+                        isChecked ? 'is-checked' : ''
+                    }`}
+                ></span>
+            </button>
+            <div className='habit__title'>
+                <Link to='/habit/id'>Habit name</Link>
             </div>
-            <div className='habit__nav'>
-                <Link to='/details'>
-                    <i className='fas fa-chart-bar'></i>
-                </Link>
-            </div>
+            <div className='habit__details'>13/30</div>
         </section>
     );
 };

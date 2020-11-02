@@ -3,12 +3,12 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 100vh;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 90;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
     .backdrop {
         display: none;
     }

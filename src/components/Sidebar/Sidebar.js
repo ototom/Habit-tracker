@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useWindowWidth } from '../../hooks/use-window-width';
 import Backdrop from '../shared/Backdrop/Backdrop';
-import Datepicker from '../shared/Datepicker/Datepicker';
 import './Sidebar.scss';
 
 const Sidebar = ({ isSidebarOpen, closeSidebarHandler }) => {
-    const { width } = useWindowWidth();
     const history = useHistory();
 
     useEffect(() => {
@@ -18,32 +15,17 @@ const Sidebar = ({ isSidebarOpen, closeSidebarHandler }) => {
             <aside
                 className={`sidebar ${isSidebarOpen ? 'sidebar--is-open' : ''}`}
             >
-                <section className='sidebar__welcome-msg'>
+                <section className='sidebar__user-profile'>
                     <img
-                        className='sidebar__avatar circle-img'
-                        src='https://via.placeholder.com/40'
+                        className='sidebar__avatar'
+                        src='https://i.pravatar.cc/50?img=22'
                         alt=''
                     />
                     Hello, Tom!
                 </section>
-                {width < 768 && <Datepicker />}
+
                 <nav className='sidebar__section'>
-                    <h3>Account</h3>
-                    <ul>
-                        <li>
-                            <NavLink to='/edit'>
-                                <i className='fas fa-user'></i>Edit profile
-                            </NavLink>
-                        </li>
-                        <li>
-                            <button>
-                                <i className='fas fa-sign-out-alt'></i>Logout
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-                <nav className='sidebar__section'>
-                    <h3>Main menu</h3>
+                    <h3>Menu</h3>
                     <ul>
                         <li>
                             <NavLink exact to='/'>
@@ -51,8 +33,8 @@ const Sidebar = ({ isSidebarOpen, closeSidebarHandler }) => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='/sum'>
-                                <i className='fas fa-chart-bar'></i>Summary
+                            <NavLink to='/edit'>
+                                <i className='fas fa-user'></i>Your profile
                             </NavLink>
                         </li>
                     </ul>
@@ -61,22 +43,20 @@ const Sidebar = ({ isSidebarOpen, closeSidebarHandler }) => {
                     <h3>Habits</h3>
                     <ul>
                         <li>
-                            <NavLink to='/hab1'>
+                            <NavLink to='/habit/1'>
                                 <i className='fas fa-dot-circle'></i>Habit 1
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='/hab2'>
+                            <NavLink to='/habit/2'>
                                 <i className='fas fa-dot-circle'></i>Habit 2
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to='/hab3'>
-                                <i className='fas fa-dot-circle'></i>Habit 3
                             </NavLink>
                         </li>
                     </ul>
                 </nav>
+                <button className='sidebar__logout-btn'>
+                    <i className='fas fa-sign-out-alt'></i>Logout
+                </button>
             </aside>
             {isSidebarOpen && <Backdrop onClick={closeSidebarHandler} />}
         </>

@@ -7,7 +7,9 @@ const MenuButton = () => {
 
     return (
         <button className='menu-btn' onClick={sidebar.openSidebarHandler}>
-            <i className='fas fa-bars'></i>
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
     );
 };

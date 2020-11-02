@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import { Switch, Route } from 'react-router-dom';
 import Habits from './pages/Habits';
 import { sidebarContext } from './context/sidebar-context';
+import HabitDetails from './pages/HabitDetails';
 
 function App() {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -25,6 +26,9 @@ function App() {
             >
                 <main className='container'>
                     <Switch>
+                        <Route path='/habit/:id'>
+                            <HabitDetails />
+                        </Route>
                         <Route exact path='/'>
                             <Habits />
                         </Route>

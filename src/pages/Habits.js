@@ -1,26 +1,43 @@
 import React from 'react';
+import AddNewHabit from '../components/Habit/AddNewHabit';
 import Habit from '../components/Habit/Habit';
-
-import Datepicker from '../components/shared/Datepicker/Datepicker';
-import MenuButton from '../components/shared/MenuButton/MenuButton';
+import Datepicker from '../components/shared/DatePicker/Datepicker';
+import PageHeader from '../components/shared/PageHeader/PageHeader';
 import { useWindowWidth } from '../hooks/use-window-width';
 
 const Habits = (props) => {
     const { width } = useWindowWidth();
 
     return (
-        <div className='content'>
-            <header className='content__header'>
-                <MenuButton />
-                <h1>Habits</h1>
-                {width >= 768 && <Datepicker />}
-            </header>
-            <Habit />
-            <Habit />
-            <Habit />
-            <Habit />
-            <Habit />
-        </div>
+        <>
+            <PageHeader
+                rightSideContent={
+                    width >= 768 && (
+                        <Datepicker format='do MMMM yyyy' date={new Date()} />
+                    )
+                }
+            >
+                Habits
+            </PageHeader>
+
+            <div className='row'>
+                <div className='col-6-sm box'>
+                    {width < 768 && (
+                        <Datepicker
+                            format='do MMMM yyyy'
+                            date={new Date()}
+                            className='datepicker--is-mobile'
+                        />
+                    )}
+                    <Habit />
+                    <Habit />
+                    <Habit />
+                    <Habit />
+                    <Habit />
+                    <AddNewHabit />
+                </div>
+            </div>
+        </>
     );
 };
 

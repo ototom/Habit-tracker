@@ -1,48 +1,81 @@
+@import '../../variables.scss';
+
 .habit {
     display: flex;
-    align-items: center;
-    background: #fff;
+    justify-content: center;
+    background: $box-background;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
     padding: 1.5rem;
-    border-radius: 1rem;
-    box-shadow: 3px 3px 3px rgba(170, 123, 123, 0.07);
+    border-radius: 1.5rem;
+    font-size: 1.2rem;
 
     &:not(:last-child) {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 
-    button,
-    a {
-        outline: none;
-        color: rgb(179, 179, 179);
+    &__checkbox-btn {
+        margin-right: 1rem;
+    }
 
-        i {
-            font-size: 1.5rem;
+    &__check-icon {
+        display: block;
+        width: 1.7rem;
+        height: 1.7rem;
+        border: 2px solid $navy-blue-30;
+        border-radius: 0.6rem;
+        transition: all 0.15s linear;
+        position: relative;
+    }
+
+    &__title {
+        a {
+            font-weight: bold;
         }
     }
 
-    .is-checked {
-        color: #2ecc71;
-    }
-
-    &__counter {
-        margin-left: 0.5rem;
-        font-size: 1.5rem;
-    }
-
     &__details {
+        color: $navy-blue-30;
         margin-left: auto;
-    }
-
-    &__nav {
-        margin-left: 5rem;
-        display: none;
+        text-align: right;
     }
 }
 
 @media (min-width: 768px) {
     .habit {
-        &__nav {
-            display: block;
+        padding: 2rem 3rem;
+
+        &:not(:last-child) {
+            margin-bottom: 2.5rem;
         }
+    }
+}
+
+.is-checked {
+    border: 2px solid $green;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0.2rem;
+        left: 0.5rem;
+        border-top: 3px solid $green;
+        border-left: 3px solid $green;
+        border-radius: 0.15rem;
+        animation: check 0.2s;
+        animation-fill-mode: forwards;
+    }
+}
+
+@keyframes check {
+    0% {
+        width: 0px;
+        height: 0px;
+        transform: rotate(400deg);
+    }
+
+    100% {
+        width: 7px;
+        height: 13px;
+        transform: rotate(-135deg);
     }
 }

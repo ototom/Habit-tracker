@@ -1,0 +1,60 @@
+@import '../../variables.scss';
+
+.add-new-habit {
+    &__btn {
+        display: block;
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+        border: 2px dashed $navy-blue-20;
+        color: $navy-blue-30;
+        width: 100%;
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-align: left;
+        display: flex;
+        align-items: center;
+
+        &:focus {
+            outline: none;
+            border-color: $navy-blue-30;
+        }
+    }
+
+    &__icon {
+        display: block;
+        position: relative;
+        width: 1.7rem;
+        height: 1.7rem;
+        float: left;
+        margin-right: 1rem;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            border-radius: 0.2rem;
+            background: $navy-blue-20;
+        }
+
+        &::before {
+            top: 0;
+            left: 0.8rem;
+            width: 3px;
+            height: 1.7rem;
+        }
+        &::after {
+            top: 0.8rem;
+            left: 0;
+            width: 1.7rem;
+            height: 3px;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .add-new-habit {
+        &__btn {
+            padding: 2rem 3rem;
+        }
+    }
+}

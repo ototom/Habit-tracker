@@ -1,20 +1,41 @@
+@import '../../../variables.scss';
+
 .datepicker {
+    margin-left: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 3rem;
+    min-width: 20%;
+    border-radius: 10px;
+    color: $navy-blue-40;
 
     &__date {
-        margin: 0 1rem;
+        padding: 0 0.5rem;
+        font-size: 1.1rem;
     }
-}
 
-@media (min-width: 768px) {
-    .datepicker {
-        padding: 1rem 1.5rem;
-        border: 1px solid rgb(218, 218, 218);
-        border-radius: 40px;
-        margin-bottom: 0;
-        margin-left: auto;
+    button {
+        padding: 0 0.5rem;
+        color: inherit;
+
+        &:hover {
+            color: $navy-blue-50;
+        }
+    }
+
+    &--is-mobile {
+        width: 100%;
+        margin-bottom: 3rem;
+        color: $navy-blue-40;
+        padding: 0 2rem;
+
+        .datepicker__date {
+            font-size: 1.5rem;
+        }
+
+        button {
+            font-size: 1.5rem;
+            color: inherit;
+        }
     }
 }

@@ -1,0 +1,119 @@
+.row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto;
+    column-gap: 0.5rem;
+    row-gap: 0.5rem;
+    margin: 0 0.5rem;
+
+    &--no-margin {
+        margin: 0;
+    }
+}
+
+.col {
+    &-1-sm {
+        grid-column: span 1;
+    }
+    &-2-sm {
+        grid-column: span 2;
+    }
+    &-3-sm {
+        grid-column: span 3;
+    }
+    &-4-sm {
+        grid-column: span 4;
+    }
+    &-5-sm {
+        grid-column: span 5;
+    }
+    &-6-sm {
+        grid-column: span 6;
+    }
+}
+
+@media (min-width: 1000px) {
+    .row {
+        margin: 0 2rem;
+        column-gap: 2rem;
+        row-gap: 2rem;
+
+        &--no-margin {
+            margin: 0;
+        }
+    }
+    .col {
+        &-1-md {
+            grid-column: span 1;
+        }
+        &-2-md {
+            grid-column: span 2;
+        }
+        &-3-md {
+            grid-column: span 3;
+        }
+        &-4-md {
+            grid-column: span 4;
+        }
+        &-5-md {
+            grid-column: span 5;
+        }
+        &-6-md {
+            grid-column: span 6;
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .col {
+        &-1-lg {
+            grid-column: span 1;
+        }
+        &-2-lg {
+            grid-column: span 2;
+        }
+        &-3-lg {
+            grid-column: span 3;
+        }
+        &-4-lg {
+            grid-column: span 4;
+        }
+        &-5-lg {
+            grid-column: span 5;
+        }
+        &-6-lg {
+            grid-column: span 6;
+        }
+    }
+}
+
+@media (min-width: 1600px) {
+    .row {
+        column-gap: 3rem;
+        row-gap: 3rem;
+
+        &--no-margin {
+            margin: 0;
+        }
+    }
+    .col {
+        &-1-xl {
+            grid-column: span 1;
+        }
+        &-2-xl {
+            grid-column: span 2;
+        }
+        &-3-xl {
+            grid-column: span 3;
+        }
+        &-4-xl {
+            grid-column: span 4;
+        }
+        &-5-xl {
+            grid-column: span 5;
+        }
+        &-6-xl {
+            grid-column: span 6;
+        }
+    }
+}

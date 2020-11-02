@@ -1,15 +1,18 @@
 import React from 'react';
+import { format } from 'date-fns';
 import './Datepicker.scss';
 
-const Datepicker = () => {
+const Datepicker = (props) => {
     return (
-        <div className='datepicker'>
-            <button>
-                <i className='fas fa-arrow-left'></i>
+        <div className={`datepicker ${props.className ? props.className : ''}`}>
+            <button className='datepicker__btn' onClick={props.prevDateHandler}>
+                <i className='fas fa-chevron-left'></i>
             </button>
-            <span className='datepicker__date'>Monday, 20 oct 2020</span>
-            <button>
-                <i className='fas fa-arrow-right'></i>
+            <span className='datepicker__date'>
+                {format(props.date, props.format)}
+            </span>
+            <button className='datepicker__btn' onClick={props.nextDateHandler}>
+                <i className='fas fa-chevron-right'></i>
             </button>
         </div>
     );
