@@ -1,0 +1,103 @@
+@import '../variables.scss';
+
+.auth {
+    width: 100%;
+    height: 100vh;
+
+    &__hero {
+        display: none;
+    }
+
+    &__form {
+        display: flex;
+        align-items: center;
+
+        h1 {
+            text-align: center;
+            font-size: 3.5rem;
+        }
+    }
+
+    &__form-container {
+        width: 80%;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    &__nav {
+        margin-top: 2rem;
+        text-align: center;
+
+        a {
+            font-weight: bold;
+            padding: 0 0.2rem;
+        }
+    }
+
+    &__submit {
+        font-size: 1.2rem;
+        padding: 0.6rem 1.5rem;
+        border-radius: 0.5rem;
+        background: $main-color;
+    }
+}
+
+@media (min-width: 1000px) {
+    .auth {
+        &__hero {
+            display: flex;
+            background: linear-gradient(
+                    rgba($main-color, 0.8),
+                    rgba($main-color, 0.8)
+                ),
+                url('https://images.unsplash.com/photo-1509822929063-6b6cfc9b42f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2700&q=80');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &__hero-text {
+            text-align: center;
+            padding: 4rem;
+            color: #fff;
+            max-width: 700px;
+
+            p {
+                font-size: 2rem;
+                text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            }
+
+            h1 {
+                width: 100%;
+                font-size: 5rem;
+                text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            }
+
+            a {
+                color: $text-color;
+                display: block;
+                background: #fff;
+                width: 100%;
+                padding: 1rem 2rem;
+                border-radius: 0.7rem;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+                &:hover {
+                    transform: translateY(-0.5rem);
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                }
+                &:active {
+                    transform: translateY(0rem);
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                }
+            }
+        }
+
+        &__nav {
+            display: none;
+        }
+    }
+}
