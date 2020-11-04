@@ -3,7 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import Backdrop from '../shared/Backdrop/Backdrop';
 import './Sidebar.scss';
 
-const Sidebar = ({ isSidebarOpen, closeSidebarHandler }) => {
+const Sidebar = ({ isSidebarOpen, closeSidebarHandler, logoutHandler }) => {
     const history = useHistory();
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const Sidebar = ({ isSidebarOpen, closeSidebarHandler }) => {
                         </li>
                     </ul>
                 </nav>
-                <button className='sidebar__logout-btn'>
+                <button className='sidebar__logout-btn' onClick={logoutHandler}>
                     <i className='fas fa-sign-out-alt'></i>Logout
                 </button>
             </aside>

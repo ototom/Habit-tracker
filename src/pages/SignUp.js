@@ -1,23 +1,24 @@
 import { useFormik } from 'formik';
 import React from 'react';
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { authContext } from '../context/auth-context';
-
 import './Auth.scss';
 
-const SignIn = () => {
-    const auth = useContext(authContext);
+const SignUp = () => {
     const formik = useFormik({
         initialValues: {
+            name: '',
             email: '',
             password: '',
         },
         onSubmit: (values) => {
-            auth.login();
+            console.log(values);
         },
         validate: (values) => {
             const errors = {};
+
+            if (!values.name) {
+                errors.name = 'Name field is required';
+            }
 
             if (!values.email) {
                 errors.email = 'Email field is required';
@@ -29,6 +30,9 @@ const SignIn = () => {
 
             if (!values.password) {
                 errors.password = 'Password field is required';
+            } else if (values.password.length < 6) {
+                errors.password =
+                    'Password must consists of at least 6 characters';
             }
 
             return errors;
@@ -38,8 +42,29 @@ const SignIn = () => {
         <div className='auth row row--no-margin'>
             <div className='auth__form col-6-sm col-3-md col-4-xl'>
                 <div className='auth__form-container'>
-                    <h1>Sign in</h1>
+                    <h1>Sign up</h1>
                     <form onSubmit={formik.handleSubmit}>
+                        <div className='form-field'>
+                            <label htmlFor='name'>Name:</label>
+                            <div className='form-field__input form-field__input--with-icon'>
+                                <input
+                                    type='text'
+                                    name='name'
+                                    id='name'
+                                    value={formik.values.name}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                />
+                                <span className='form-field__icon'>
+                                    <i className='fas fa-user'></i>
+                                </span>
+                            </div>
+                            {formik.errors.name && formik.touched.name && (
+                                <p className='form-field__notification is-warning'>
+                                    {formik.errors.name}
+                                </p>
+                            )}
+                        </div>
                         <div className='form-field'>
                             <label htmlFor='email'>Email:</label>
                             <div className='form-field__input form-field__input--with-icon'>
@@ -88,21 +113,21 @@ const SignIn = () => {
                         </div>
                     </form>
                     <div className='auth__nav'>
-                        Don't have an account?
-                        <Link to='/sign-up'>Create one!</Link>
+                        Already have an accound
+                        <Link to='/sign-in'>Sign in!</Link>
                     </div>
                 </div>
             </div>
 
-            <div className='auth__hero col-3-md col-2-xl auth__hero--sign-in'>
+            <div className='auth__hero col-3-md col-2-xl auth__hero--sign-up'>
                 <div className='auth__hero-text'>
                     <h1>Welcome!</h1>
-                    <p>Fill the form to have access to all features or...</p>
-                    <Link to='/sign-up'>Switch to sign up</Link>
+                    <p>Create an account or if you have one...</p>
+                    <Link to='/sign-in'>Switch to sign in</Link>
                 </div>
             </div>
         </div>
     );
 };
 
-export default SignIn;
+export default SignUp;

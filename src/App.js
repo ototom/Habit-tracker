@@ -6,10 +6,14 @@ import { sidebarContext } from './context/sidebar-context';
 import HabitDetails from './pages/HabitDetails';
 import SignIn from './pages/SignIn';
 import { authContext } from './context/auth-context';
+import SignUp from './pages/SignUp';
 
 function App() {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
-    const [isLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const loginHandler = () => setIsLoggedIn(true);
+    const logoutHandler = () => setIsLoggedIn(false);
 
     const closeSidebarHandler = useCallback(() => setSidebarOpen(false), []);
     const openSidebarHandler = () => setSidebarOpen(true);
@@ -19,7 +23,9 @@ function App() {
             <Route path='/sign-in'>
                 <SignIn />
             </Route>
-            <Route path='/sign-up'>sign up</Route>
+            <Route path='/sign-up'>
+                <SignUp />
+            </Route>
             <Redirect from='/' to='/sign-in' />
             <Route>404</Route>
         </Switch>
@@ -31,9 +37,6 @@ function App() {
                 <Switch>
                     <Route path='/habit/:id'>
                         <HabitDetails />
-                    </Route>
-                    <Route path='sign-in'>
-                        <SignIn />
                     </Route>
                     <Route exact path='/'>
                         <Habits />
@@ -52,9 +55,16 @@ function App() {
                 <Sidebar
                     closeSidebarHandler={closeSidebarHandler}
                     isSidebarOpen={isSidebarOpen}
+                    logoutHandler={logoutHandler}
                 />
             )}
-            <authContext.Provider value={{ isLoggedIn }}>
+            <authContext.Provider
+                value={{
+                    isLoggedIn,
+                    login: loginHandler,
+                    logout: logoutHandler,
+                }}
+            >
                 <sidebarContext.Provider
                     value={{
                         isSidebarOpen,
