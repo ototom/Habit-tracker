@@ -84,11 +84,11 @@ const HabitDetails = () => {
                                 <h2>Manage</h2>
                             </div>
                             <div className='box__content'>
-                                <button className='btn btn--delete'>
+                                <button className='btn btn--danger-outline btn--full-width btn--big'>
                                     <i className='far fa-trash-alt'></i>
                                     Delete
                                 </button>
-                                <button className='btn btn--edit'>
+                                <button className='btn btn--info-outline btn--full-width btn--big'>
                                     <i className='far fa-edit'></i>Edit
                                 </button>
                             </div>

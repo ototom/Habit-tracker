@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../components/shared/Button/Button';
 import './Auth.scss';
 
 const SignUp = () => {
@@ -109,7 +110,9 @@ const SignUp = () => {
                                 )}
                         </div>
                         <div className='text-center'>
-                            <button className='auth__submit'>Submit</button>
+                            <Button className='btn--info' type='submit'>
+                                Submit
+                            </Button>
                         </div>
                     </form>
                     <div className='auth__nav'>
@@ -123,7 +126,12 @@ const SignUp = () => {
                 <div className='auth__hero-text'>
                     <h1>Welcome!</h1>
                     <p>Create an account or if you have one...</p>
-                    <Link to='/sign-in'>Switch to sign in</Link>
+                    <Button
+                        to='/sign-in'
+                        className='btn--big btn--full-width btn--light'
+                    >
+                        Switch to sign in
+                    </Button>
                 </div>
             </div>
         </div>

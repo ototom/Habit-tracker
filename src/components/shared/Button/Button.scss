@@ -1,0 +1,113 @@
+@import '../../../variables.scss';
+
+.btn {
+    font-size: inherit;
+    color: $text-color;
+    border-radius: 0.7rem;
+    padding: 0.7rem 1.5rem;
+    border: 1px solid transparent;
+    background: $navy-blue-10;
+
+    i {
+        margin-right: 0.5rem;
+    }
+
+    &--primary {
+        background: $main-color;
+        color: $text-color;
+
+        &-outline {
+            background: transparent;
+            color: $text-color;
+            border-color: $main-color;
+
+            &:hover {
+                background: $main-color;
+                color: $text-color;
+            }
+        }
+    }
+
+    &--info {
+        background: $blue;
+        color: $blue-light;
+
+        &-outline {
+            background: transparent;
+            color: $blue;
+            border-color: $blue;
+
+            &:hover {
+                background: $blue;
+                color: $blue-light;
+            }
+        }
+    }
+
+    &--success {
+        background: $green;
+        color: $green-light;
+
+        &-outline {
+            background: transparent;
+            color: $green;
+            border-color: $green;
+
+            &:hover {
+                background: $green;
+                color: $green-light;
+            }
+        }
+    }
+
+    &--danger {
+        background: $red;
+        color: $red-light;
+
+        &-outline {
+            background: transparent;
+            color: $red;
+            border-color: $red;
+
+            &:hover {
+                background: $red;
+                color: $red-light;
+            }
+        }
+    }
+
+    &--light {
+        background: #fff;
+        color: $text-color;
+
+        &-outline {
+            background: transparent;
+            color: $text-color;
+            border-color: $text-color;
+
+            &:hover {
+                background: #fff;
+                color: $text-color;
+            }
+        }
+    }
+
+    &--full-width {
+        width: 100%;
+        display: block;
+
+        &:not(:last-child) {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    &--small {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.8rem;
+    }
+
+    &--big {
+        padding: 1.1rem 2.1rem;
+        font-size: 1.3rem;
+    }
+}

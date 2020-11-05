@@ -33,13 +33,6 @@
             padding: 0 0.2rem;
         }
     }
-
-    &__submit {
-        font-size: 1.2rem;
-        padding: 0.6rem 1.5rem;
-        border-radius: 0.5rem;
-        background: $main-color;
-    }
 }
 
 @media (min-width: 1000px) {
@@ -84,26 +77,6 @@
                 width: 100%;
                 font-size: 5rem;
                 text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            }
-
-            a {
-                color: $text-color;
-                display: block;
-                background: #fff;
-                width: 100%;
-                padding: 1rem 2rem;
-                border-radius: 0.7rem;
-                font-size: 1.2rem;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-                &:hover {
-                    transform: translateY(-0.5rem);
-                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-                }
-                &:active {
-                    transform: translateY(0rem);
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-                }
             }
         }
 

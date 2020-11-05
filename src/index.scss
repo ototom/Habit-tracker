@@ -110,79 +110,6 @@ ul {
     }
 }
 
-// TODO: temporary buttons styling => to change once other button types are introduced
-.btn {
-    font-size: 1.2rem;
-    padding: 1rem 2rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
-    border-radius: 1rem;
-    background: $box-background;
-    transition: all 0.15s linear;
-    width: 100%;
-
-    &:not(:last-child) {
-        margin-bottom: 1rem;
-    }
-
-    i {
-        margin-right: 1rem;
-    }
-
-    &--delete {
-        i {
-            color: $red;
-        }
-    }
-
-    &--edit {
-        i {
-            color: $blue;
-        }
-    }
-}
-
-@media (min-width: 1000px) {
-    .btn {
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
-
-        &:hover {
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-
-            i {
-                color: inherit;
-            }
-        }
-
-        &:active {
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-        }
-
-        &--delete {
-            &:hover {
-                color: $red-light;
-                background: $red;
-
-                i {
-                    color: $red-light;
-                }
-            }
-        }
-
-        &--edit {
-            &:hover {
-                color: $blue-light;
-                background: $blue;
-
-                i {
-                    color: $blue-light;
-                }
-            }
-        }
-    }
-}
-
-// ====
-
 // TODO: to change after user's profile page creation
 .summary-list {
     list-style: none;
@@ -283,96 +210,6 @@ input[type='email'] {
     }
 }
 
-.file {
-    &__preview {
-        margin: 0 auto;
-        width: 250px;
-        height: 250px;
-        border-radius: 2rem;
-        border: 3px dashed $navy-blue-20;
-        overflow: hidden;
-        display: flex;
-
-        img {
-            object-fit: cover;
-        }
-    }
-
-    &__uploader {
-        margin: 1rem auto 0 auto;
-        width: 250px;
-        border-radius: 0.5rem;
-        // padding: 0.5rem 0;
-        background: $navy-blue-10;
-        display: flex;
-        overflow: hidden;
-        position: relative;
-
-        &--no-file {
-            .file__name {
-                // display: none;
-                transform: translateX(-100%);
-            }
-            .file__picker-btn {
-                transform: translateX(0);
-
-                &::after {
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
-            }
-        }
-    }
-
-    &__name {
-        padding: 0.5rem 1rem;
-        overflow: hidden;
-        color: $navy-blue-50;
-        transform: translateX(0);
-        transition: all 0.3s linear;
-
-        i {
-            color: $navy-blue-30;
-            margin-right: 0.5rem;
-        }
-    }
-
-    &__picker-btn {
-        margin-left: auto;
-        width: 100%;
-        height: 100%;
-        padding: 0.5rem 1rem;
-        background: $main-color;
-        font-size: inherit;
-        transform: translateX(70%);
-        transition: all 0.2s linear;
-        transition-delay: 0.5s;
-        position: absolute;
-
-        &::after {
-            content: 'Pick file';
-            position: absolute;
-            top: 50%;
-            transform: translate(20%, -50%);
-            left: 0%;
-            transition: all 0.2s linear;
-            transition-delay: 0.5s;
-        }
-    }
-
-    &__submit-btn {
-        width: 100%;
-        padding: 0.7rem 2rem;
-        border-radius: 0.5rem;
-        background: $blue;
-        max-width: 250px;
-        margin: 1rem auto 0 auto;
-        display: block;
-        font-size: inherit;
-        color: $blue-light;
-    }
-}
-
 .spinner {
     animation: spin 0.7s linear infinite;
 }
@@ -393,17 +230,5 @@ input[type='email'] {
         border-radius: 0.5rem;
         border: 1px solid darken($green-light, 10%);
         padding: 0.5rem 1rem;
-    }
-}
-
-.form-btn {
-    padding: 0.7rem 1.5rem;
-    font-size: inherit;
-    border-radius: 0.7rem;
-    background: $main-color;
-
-    &--blue {
-        background: $blue;
-        color: $blue-light;
     }
 }

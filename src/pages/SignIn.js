@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import React from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../components/shared/Button/Button';
 import { authContext } from '../context/auth-context';
 
 import './Auth.scss';
@@ -84,7 +85,9 @@ const SignIn = () => {
                                 )}
                         </div>
                         <div className='text-center'>
-                            <button className='auth__submit'>Submit</button>
+                            <Button className='btn--primary' type='submit'>
+                                Submit
+                            </Button>
                         </div>
                     </form>
                     <div className='auth__nav'>
@@ -98,7 +101,12 @@ const SignIn = () => {
                 <div className='auth__hero-text'>
                     <h1>Welcome!</h1>
                     <p>Fill the form to have access to all features or...</p>
-                    <Link to='/sign-up'>Switch to sign up</Link>
+                    <Button
+                        to='/sign-up'
+                        className='btn--big btn--light btn--full-width'
+                    >
+                        Switch to sign up
+                    </Button>
                 </div>
             </div>
         </div>
