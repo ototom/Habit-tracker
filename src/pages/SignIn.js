@@ -3,6 +3,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/shared/Button/Button';
+import Input from '../components/shared/Input/Input';
 import { authContext } from '../context/auth-context';
 
 import './Auth.scss';
@@ -41,49 +42,30 @@ const SignIn = () => {
                 <div className='auth__form-container'>
                     <h1>Sign in</h1>
                     <form onSubmit={formik.handleSubmit}>
-                        <div className='form-field'>
-                            <label htmlFor='email'>Email:</label>
-                            <div className='form-field__input form-field__input--with-icon'>
-                                <input
-                                    type='email'
-                                    name='email'
-                                    id='email'
-                                    value={formik.values.email}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                />
-                                <span className='form-field__icon'>
-                                    <i className='far fa-envelope'></i>
-                                </span>
-                            </div>
-                            {formik.errors.email && formik.touched.email && (
-                                <p className='form-field__notification is-warning'>
-                                    {formik.errors.email}
-                                </p>
-                            )}
-                        </div>
-                        <div className='form-field'>
-                            <label htmlFor='password'>Password:</label>
-                            <div className='form-field__input form-field__input--with-icon'>
-                                <input
-                                    type='password'
-                                    name='password'
-                                    id='password'
-                                    value={formik.values.password}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                />
-                                <span className='form-field__icon'>
-                                    <i className='fas fa-key'></i>
-                                </span>
-                            </div>
-                            {formik.errors.password &&
-                                formik.touched.password && (
-                                    <p className='form-field__notification is-warning'>
-                                        {formik.errors.password}
-                                    </p>
-                                )}
-                        </div>
+                        <Input
+                            label='Email:'
+                            icon='fas fa-envelope'
+                            type='email'
+                            name='email'
+                            id='email'
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.errors.email}
+                            touched={formik.touched.email}
+                        />
+                        <Input
+                            label='Password:'
+                            icon='fas fa-key'
+                            type='password'
+                            name='password'
+                            id='password'
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.errors.password}
+                            touched={formik.touched.password}
+                        />
                         <div className='text-center'>
                             <Button className='btn--primary' type='submit'>
                                 Submit

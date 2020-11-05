@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import PageHeader from '../components/shared/PageHeader/PageHeader';
 import Button from '../components/shared/Button/Button';
 import Filepicker from '../components/shared/Filepicker/Filepicker';
+import Input from '../components/shared/Input/Input';
 
 const UserProfile = () => {
     const formik = useFormik({
@@ -16,6 +17,10 @@ const UserProfile = () => {
         validate: (values) => {
             const errors = {};
 
+            if (values.newPassword && values.newPassword.length < 6) {
+                errors.newPassword =
+                    'New password must consists of minimum 6 characters';
+            }
             if (!values.currentPassword) {
                 errors.currentPassword = 'You must confirm changes';
             }
@@ -34,65 +39,44 @@ const UserProfile = () => {
                     </div>
                     <div className='box__content'>
                         <form onSubmit={formik.handleSubmit}>
-                            <div className='form-field'>
-                                <label htmlFor='name'>Name:</label>
-                                <div className='form-field__input'>
-                                    <input
-                                        type='text'
-                                        name='name'
-                                        id='name'
-                                        value='Tom'
-                                        disabled
-                                    />
-                                </div>
-                            </div>
-                            <div className='form-field'>
-                                <label htmlFor='email'>Email:</label>
-                                <div className='form-field__input'>
-                                    <input
-                                        type='email'
-                                        name='email'
-                                        id='email'
-                                        value='example@mail.com'
-                                        disabled
-                                    />
-                                </div>
-                            </div>
-                            <div className='form-field'>
-                                <label htmlFor='newPassword'>Password:</label>
-                                <div className='form-field__input'>
-                                    <input
-                                        type='password'
-                                        name='newPassword'
-                                        id='newPassword'
-                                        placeholder='New password'
-                                        onChange={formik.handleChange}
-                                        value={formik.values.newPassword}
-                                    />
-                                </div>
-                            </div>
-                            <div className='form-field'>
-                                <label htmlFor='currentPassword'>
-                                    Confirm changes:
-                                </label>
-                                <div className='form-field__input'>
-                                    <input
-                                        type='password'
-                                        name='currentPassword'
-                                        id='currentPassword'
-                                        placeholder='Your current password'
-                                        onChange={formik.handleChange}
-                                        value={formik.values.currentPassword}
-                                        onBlur={formik.handleBlur}
-                                    />
-                                </div>
-                                {formik.errors.currentPassword &&
-                                    formik.touched.currentPassword && (
-                                        <p className='form-field__notification is-warning'>
-                                            {formik.errors.currentPassword}
-                                        </p>
-                                    )}
-                            </div>
+                            <Input
+                                label='Name:'
+                                type='text'
+                                name='name'
+                                id='name'
+                                value='Tom'
+                                disabled
+                            />
+                            <Input
+                                label='Email:'
+                                type='text'
+                                name='email'
+                                id='email'
+                                value='example@mail.com'
+                                disabled
+                            />
+                            <Input
+                                label='Password:'
+                                type='password'
+                                name='newPassword'
+                                id='newPassword'
+                                value={formik.values.newPassword}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={formik.errors.newPassword}
+                                touched={formik.touched.newPassword}
+                            />
+                            <Input
+                                label='Confirm changes:'
+                                type='password'
+                                name='currentPassword'
+                                id='currentPassword'
+                                value={formik.values.currentPassword}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={formik.errors.currentPassword}
+                                touched={formik.touched.currentPassword}
+                            />
                             <Button type='submit' className='btn--info'>
                                 Save
                             </Button>
