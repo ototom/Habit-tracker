@@ -5,7 +5,7 @@ import Datepicker from '../components/shared/DatePicker/Datepicker';
 import PageHeader from '../components/shared/PageHeader/PageHeader';
 import { useWindowWidth } from '../hooks/use-window-width';
 
-const Habits = (props) => {
+const Habits = () => {
     const { width } = useWindowWidth();
 
     return (

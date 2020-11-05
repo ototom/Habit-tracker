@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { NavLink, useHistory } from 'react-router-dom';
 import Backdrop from '../shared/Backdrop/Backdrop';
 import './Sidebar.scss';
@@ -33,7 +34,7 @@ const Sidebar = ({ isSidebarOpen, closeSidebarHandler, logoutHandler }) => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='/edit'>
+                            <NavLink to='/profile'>
                                 <i className='fas fa-user'></i>Your profile
                             </NavLink>
                         </li>
@@ -61,6 +62,12 @@ const Sidebar = ({ isSidebarOpen, closeSidebarHandler, logoutHandler }) => {
             {isSidebarOpen && <Backdrop onClick={closeSidebarHandler} />}
         </>
     );
+};
+
+Sidebar.propTypes = {
+    isSidebarOpen: PropTypes.bool,
+    closeSidebarHandler: PropTypes.func,
+    logoutHandler: PropTypes.func,
 };
 
 export default Sidebar;

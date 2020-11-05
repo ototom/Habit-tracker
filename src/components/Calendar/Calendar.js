@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Calendar.scss';
 
 const Calendar = ({ data, date, updateDay }) => {
@@ -57,6 +58,12 @@ const Calendar = ({ data, date, updateDay }) => {
             </table>
         </div>
     );
+};
+
+Calendar.propTypes = {
+    data: PropTypes.array,
+    date: PropTypes.object,
+    updateDay: PropTypes.func,
 };
 
 export default Calendar;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import './Datepicker.scss';
 
@@ -16,6 +17,14 @@ const Datepicker = (props) => {
             </button>
         </div>
     );
+};
+
+Datepicker.propTypes = {
+    prevDateHandler: PropTypes.func,
+    nextDateHandler: PropTypes.func,
+    date: PropTypes.object,
+    format: PropTypes.string,
+    className: PropTypes.string,
 };
 
 export default Datepicker;

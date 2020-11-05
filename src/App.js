@@ -7,10 +7,11 @@ import HabitDetails from './pages/HabitDetails';
 import SignIn from './pages/SignIn';
 import { authContext } from './context/auth-context';
 import SignUp from './pages/SignUp';
+import UserProfile from './pages/UserProfile';
 
 function App() {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
     const loginHandler = () => setIsLoggedIn(true);
     const logoutHandler = () => setIsLoggedIn(false);
@@ -37,6 +38,9 @@ function App() {
                 <Switch>
                     <Route path='/habit/:id'>
                         <HabitDetails />
+                    </Route>
+                    <Route path='/profile'>
+                        <UserProfile />
                     </Route>
                     <Route exact path='/'>
                         <Habits />
