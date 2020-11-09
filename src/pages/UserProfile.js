@@ -2,8 +2,8 @@ import React from 'react';
 import { useFormik } from 'formik';
 import PageHeader from '../components/shared/PageHeader/PageHeader';
 import Button from '../components/shared/Button/Button';
-import Filepicker from '../components/shared/Filepicker/Filepicker';
 import Input from '../components/shared/Input/Input';
+import FileUpload from '../components/shared/FileUpload/FileUpload';
 
 const UserProfile = () => {
     const formik = useFormik({
@@ -90,7 +90,7 @@ const UserProfile = () => {
                         <h2>Avatar</h2>
                     </div>
                     <div className='box__content'>
-                        <Filepicker />
+                        <FileUpload />
                     </div>
                 </div>
             </div>
