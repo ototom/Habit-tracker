@@ -148,6 +148,18 @@ textarea {
     }
 }
 
+::placeholder {
+    color: $navy-blue-30;
+}
+
+:-ms-input-placeholder {
+    color: $navy-blue-30;
+}
+
+::-ms-input-placeholder {
+    color: $navy-blue-30;
+}
+
 .loading {
     margin-left: 1rem;
 }
