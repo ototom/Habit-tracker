@@ -60,6 +60,7 @@ const UserProfile = () => {
                                 type='password'
                                 name='newPassword'
                                 id='newPassword'
+                                placeholder='Your new password'
                                 value={formik.values.newPassword}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
@@ -71,6 +72,7 @@ const UserProfile = () => {
                                 type='password'
                                 name='currentPassword'
                                 id='currentPassword'
+                                placeholder='Enter your current password'
                                 value={formik.values.currentPassword}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}

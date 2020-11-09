@@ -1,0 +1,108 @@
+@import '../../../variables.scss';
+
+.notification {
+    max-height: 15rem;
+    transition: max-height 0.2s ease-out;
+
+    &--shrink {
+        max-height: 0;
+    }
+    &__content {
+        width: 100%;
+        padding: 1rem 2rem 1rem 1rem;
+        margin: 0 auto;
+        z-index: 120;
+        position: relative;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+        &--success {
+            background: $green;
+            color: $green-light;
+        }
+
+        &--danger {
+            background: $red;
+            color: $red-light;
+        }
+
+        &--info {
+            background: $blue;
+            color: $blue-light;
+        }
+
+        &--slide-in {
+            animation-name: slideUp;
+            animation-duration: 0.2s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+        }
+        &--slide-out {
+            animation-name: slideDown;
+            animation-duration: 0.2s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+        }
+    }
+    &__close-btn {
+        position: absolute;
+        right: 0.7rem;
+        top: 0.7rem;
+        color: inherit;
+        font-size: 1.1rem;
+    }
+}
+
+.notifications-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 85;
+}
+
+@media (min-width: 768px) {
+    .notification {
+        &:not(:last-child) {
+            margin-bottom: 0.5rem;
+        }
+
+        &__content {
+            max-width: 650px;
+            border-radius: 0.7rem;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-bottom: none;
+        }
+    }
+
+    .notifications-container {
+        bottom: 1rem;
+    }
+}
+
+@media (min-width: 1000px) {
+    .notifications-container {
+        margin-left: $sidebar-width;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}

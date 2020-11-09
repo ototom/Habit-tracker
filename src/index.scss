@@ -148,7 +148,12 @@ textarea {
     }
 }
 
+.loading {
+    margin-left: 1rem;
+}
+
 .spinner {
+    display: inline-block;
     animation: spin 0.7s linear infinite;
 }
 
@@ -167,6 +172,16 @@ textarea {
         background: $green-light;
         border-radius: 0.5rem;
         border: 1px solid darken($green-light, 10%);
+        padding: 0.5rem 1rem;
+    }
+    &__danger {
+        max-width: 250px;
+        margin: 1rem auto 0 auto;
+        text-align: center;
+        color: $red;
+        background: $red-light;
+        border-radius: 0.5rem;
+        border: 1px solid darken($red-light, 10%);
         padding: 0.5rem 1rem;
     }
 }
