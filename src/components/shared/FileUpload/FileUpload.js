@@ -11,11 +11,6 @@ const FileUpload = () => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        // if (file.size > 500000) {
-        //     danger('The file is too big', true);
-        //     return;
-        // }
-
         setIsLoading(true);
     };
 

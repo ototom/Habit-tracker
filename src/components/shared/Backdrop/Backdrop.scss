@@ -10,6 +10,8 @@
 
 @media (min-width: 1000px) {
     .backdrop {
-        display: none;
+        &--only-mobile {
+            display: none;
+        }
     }
 }

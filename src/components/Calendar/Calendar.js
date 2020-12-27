@@ -1,69 +1,107 @@
-import React from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './Calendar.scss';
+import { authContext } from '../../context/auth-context';
+import { dataContext } from '../../context/data-context';
+import { getDate, isSameDay, parseISO } from 'date-fns';
+import { useWindowWidth } from '../../hooks/use-window-width';
+import { useRequest } from '../../hooks/use-request';
 
-const Calendar = ({ data, date, updateDay }) => {
-    const markDayHandler = (e) => {
+const Calendar = ({ data, updateDay, id }) => {
+    const calendarRef = useRef();
+    const { width } = useWindowWidth();
+    const { token } = useContext(authContext);
+    const { dispatch } = useContext(dataContext);
+    const { sendRequest } = useRequest(false);
+
+    const markDayHandler = async (e) => {
+        if (e.target.classList.contains('blocked')) return;
+        if (!e.target.dataset.date) return;
+
         updateDay(
-            e.target.textContent,
+            e.target.dataset.date,
             !e.target.classList.contains('checked')
         );
+
+        sendRequest('habit/check', {
+            method: 'POST',
+            token,
+            body: { habitId: id, date: e.target.dataset.date },
+        }).then(() => {
+            dispatch({
+                value: 'UPDATE',
+                payload: {
+                    habitId: id,
+                    date: e.target.dataset.date,
+                },
+            });
+        });
     };
 
+    useEffect(() => {
+        const setCalendarHeight = () => {
+            if (calendarRef.current && data.length > 0) {
+                calendarRef.current.style.height =
+                    calendarRef.current.offsetWidth * (data.length / 7) + 'px';
+            }
+        };
+
+        setCalendarHeight();
+    }, [data, width]);
+
     return (
-        <div className='calendar__container'>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                        <th>Sun</th>
-                    </tr>
-                </thead>
-                <tbody onClick={markDayHandler}>
-                    {data.map((week, i) => {
-                        return (
-                            <tr key={i}>
-                                {week.map((day, i) => {
-                                    const today = new Date();
-                                    today.setHours(0, 0, 0, 0);
-                                    return (
-                                        <td key={i}>
-                                            <span
-                                                className={`${
-                                                    day.checked ? 'checked' : ''
-                                                } ${
-                                                    today.getMonth() ===
-                                                        date.getMonth() &&
-                                                    today.getFullYear() ===
-                                                        date.getFullYear() &&
-                                                    today.getDate() === day.day
-                                                        ? 'today'
-                                                        : ''
-                                                }`}
-                                            >
-                                                {day.day}
-                                            </span>
-                                        </td>
-                                    );
-                                })}
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+        <div className='calendar'>
+            <div className='calendar__header'>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+                <div>Sun</div>
+            </div>
+            <div
+                className='calendar__month'
+                ref={calendarRef}
+                onClick={markDayHandler}
+            >
+                {data.map((week, i) => {
+                    return (
+                        <div key={i} className='calendar__week'>
+                            {week.map((day, i) => {
+                                return (
+                                    <div
+                                        key={i}
+                                        data-date={day.date}
+                                        className={`${
+                                            day.checked ? 'checked' : ''
+                                        } ${
+                                            isSameDay(
+                                                parseISO(day.date),
+                                                new Date()
+                                            )
+                                                ? 'today'
+                                                : ''
+                                        } ${
+                                            day.isBlocked ? 'blocked' : ''
+                                        } calendar__day`}
+                                    >
+                                        {getDate(new Date(day.date))}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 };
 
 Calendar.propTypes = {
     data: PropTypes.array,
-    date: PropTypes.object,
     updateDay: PropTypes.func,
+    id: PropTypes.string,
 };
 
 export default Calendar;

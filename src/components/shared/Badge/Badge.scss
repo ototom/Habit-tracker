@@ -1,0 +1,29 @@
+@import '../../../variables.scss';
+
+.badge {
+    font-size: 0.7rem;
+    border-radius: 3px;
+    border-width: 1px;
+    border-style: solid;
+    padding: 1px 4px;
+    position: relative;
+    top: -0.7rem;
+    display: inline-block;
+    margin: 0 2px;
+
+    &--info {
+        background: $blue-light;
+        border-color: $blue;
+        color: $blue;
+    }
+    &--success {
+        background: $green-light;
+        border-color: $green;
+        color: $green;
+    }
+    &--danger {
+        background: $red-light;
+        border-color: $red;
+        color: $red;
+    }
+}

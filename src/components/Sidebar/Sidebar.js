@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, useHistory } from 'react-router-dom';
 import Backdrop from '../shared/Backdrop/Backdrop';
 import './Sidebar.scss';
+import { authContext } from '../../context/auth-context';
+import { dataContext } from '../../context/data-context';
 
 const Sidebar = ({ isSidebarOpen, closeSidebarHandler, logoutHandler }) => {
     const history = useHistory();
+    const { habits } = useContext(dataContext);
+    const { user } = useContext(authContext);
 
     useEffect(() => {
         history.listen(closeSidebarHandler);
@@ -22,7 +26,7 @@ const Sidebar = ({ isSidebarOpen, closeSidebarHandler, logoutHandler }) => {
                         src='https://i.pravatar.cc/50?img=22'
                         alt=''
                     />
-                    Hello, Tom!
+                    Hello, {user}!
                 </section>
 
                 <nav className='sidebar__section'>
@@ -40,26 +44,28 @@ const Sidebar = ({ isSidebarOpen, closeSidebarHandler, logoutHandler }) => {
                         </li>
                     </ul>
                 </nav>
-                <nav className='sidebar__section'>
-                    <h3>Habits</h3>
-                    <ul>
-                        <li>
-                            <NavLink to='/habit/1'>
-                                <i className='fas fa-dot-circle'></i>Habit 1
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to='/habit/2'>
-                                <i className='fas fa-dot-circle'></i>Habit 2
-                            </NavLink>
-                        </li>
-                    </ul>
-                </nav>
+                {habits.length > 0 && (
+                    <nav className='sidebar__section'>
+                        <h3>Habits</h3>
+                        <ul>
+                            {habits.map((habit) => (
+                                <li key={habit._id}>
+                                    <NavLink to={`/habit/${habit._id}`}>
+                                        <i className='fas fa-dot-circle'></i>
+                                        {habit.name}
+                                    </NavLink>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                )}
                 <button className='sidebar__logout-btn' onClick={logoutHandler}>
                     <i className='fas fa-sign-out-alt'></i>Logout
                 </button>
             </aside>
-            {isSidebarOpen && <Backdrop onClick={closeSidebarHandler} />}
+            {isSidebarOpen && (
+                <Backdrop onlyMobile={true} onClick={closeSidebarHandler} />
+            )}
         </>
     );
 };

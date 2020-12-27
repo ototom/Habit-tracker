@@ -5,18 +5,29 @@ import { Link } from 'react-router-dom';
 import Button from '../components/shared/Button/Button';
 import Input from '../components/shared/Input/Input';
 import { authContext } from '../context/auth-context';
+import { success } from '../components/shared/Notification';
 
 import './Auth.scss';
+import { useRequest } from '../hooks/use-request';
 
 const SignIn = () => {
+    const { sendRequest } = useRequest(false);
     const auth = useContext(authContext);
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
         },
-        onSubmit: (values) => {
-            auth.login();
+        onSubmit: async (values) => {
+            try {
+                const data = await sendRequest('user/signin', {
+                    method: 'POST',
+                    body: values,
+                });
+
+                success('You have been logged in', true);
+                auth.login(data);
+            } catch (error) {}
         },
         validate: (values) => {
             const errors = {};

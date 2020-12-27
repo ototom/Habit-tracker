@@ -2,8 +2,6 @@
 
 .add-new-habit {
     display: block;
-    // padding: 2rem 3rem;
-    // padding: 1.5rem;
     border-radius: 1.5rem;
     border: 2px dashed $navy-blue-20;
     color: $navy-blue-30;
@@ -11,8 +9,18 @@
     font-weight: bold;
     font-size: 1.2rem;
     text-align: left;
-    display: flex;
-    align-items: center;
+    transition: all 0.2s linear;
+
+    &--active {
+        background: #fff;
+        box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.1);
+
+        border: none;
+    }
+
+    &__controlls {
+        margin-top: 0.7rem;
+    }
 
     &__toggle-btn {
         width: 100%;
@@ -31,15 +39,16 @@
     &__form {
         padding: 1.5rem;
         width: 100%;
-        display: flex;
-        align-items: center;
 
         input[type='text'] {
-            border: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 0;
             background: transparent;
             font-size: inherit;
-            padding: 0;
+            padding: 0.7rem 0;
             color: $navy-blue-40;
 
             &:focus {
@@ -50,20 +59,28 @@
     }
 
     &__btn {
-        font-size: inherit;
-        color: inherit;
-        padding: 0 0.5rem;
+        font-size: 1rem;
+        color: $navy-blue-40;
+        padding: 0.4rem 0.8rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
 
         &:not(:last-child) {
             margin-right: 1rem;
         }
 
         &--check {
-            color: $green;
+            &:hover {
+                background: $green-light;
+                color: $green;
+            }
         }
 
         &--close {
-            color: $red;
+            &:hover {
+                background: $red-light;
+                color: $red;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { v4 } from 'uuid';
 import Notification from './Notification';
 
@@ -49,6 +50,11 @@ const NotificationManager = ({ setNotify, deleteNotify }) => {
             {...props}
         />
     ));
+};
+
+NotificationManager.propTypes = {
+    setNotify: PropTypes.func,
+    deleteNotify: PropTypes.func,
 };
 
 export default NotificationManager;

@@ -4,6 +4,7 @@ import PageHeader from '../components/shared/PageHeader/PageHeader';
 import Button from '../components/shared/Button/Button';
 import Input from '../components/shared/Input/Input';
 import FileUpload from '../components/shared/FileUpload/FileUpload';
+import Badge from '../components/shared/Badge/Badge';
 
 const UserProfile = () => {
     const formik = useFormik({
@@ -35,7 +36,9 @@ const UserProfile = () => {
             <div className='row'>
                 <div className='col-6-sm col-3-lg col-4-xl box'>
                     <div className='box__header'>
-                        <h2>Personal information</h2>
+                        <h2>
+                            Personal information <Badge>Soon!</Badge>
+                        </h2>
                     </div>
                     <div className='box__content'>
                         <form onSubmit={formik.handleSubmit}>
@@ -87,7 +90,9 @@ const UserProfile = () => {
                 </div>
                 <div className='col-6-sm col-3-lg col-2-xl box'>
                     <div className='box__header'>
-                        <h2>Avatar</h2>
+                        <h2>
+                            Avatar <Badge>Soon!</Badge>
+                        </h2>
                     </div>
                     <div className='box__content'>
                         <FileUpload />

@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useReducer } from 'react';
+import { isSameDay, parseISO, subDays } from 'date-fns';
 
 const calendarReducer = (state, action) => {
     switch (action.type) {
@@ -8,7 +9,12 @@ const calendarReducer = (state, action) => {
             const updatedState = [...state];
             updatedState.forEach((week) =>
                 week.map((day) => {
-                    if (day.day === +action.payload.day) {
+                    if (
+                        isSameDay(
+                            parseISO(day.date),
+                            parseISO(action.payload.day)
+                        )
+                    ) {
                         day.checked = action.payload.state;
                     }
                     return day;
@@ -20,54 +26,77 @@ const calendarReducer = (state, action) => {
     }
 };
 
-export const useCalendar = (startDate) => {
-    const [date, setDate] = useState(startDate || new Date());
+export const useCalendar = (startDate = new Date(), checkedDays = []) => {
+    const [date, setDate] = useState(startDate);
     const [monthData, dispatch] = useReducer(calendarReducer, []);
 
     const generateMonth = useCallback(
         (year, month, processedDays = 0, calendarData = []) => {
-            // NOTE: new Date(year, month + 1, 0).getDate() returns the last day of previous month, so +1 to current month must be added
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-
             const weekData = [];
 
-            // NOTE: generate empty cells at the beggining of the month
-            // TODO: fill empty cells with days from previous month
-            if (calendarData.length === 0) {
-                const emptyCells =
-                    new Date(year, month, 1).getDay() === 0
-                        ? 6
-                        : new Date(year, month, 1).getDay() - 1;
+            // NOTE: new Date(year, month + 1, 0).getDate() returns last day of previous month, so +1 to current month must be added
+            const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
 
-                for (let i = 0; i < emptyCells; i++) {
-                    weekData.push('');
+            // NOTE: determine how many days must be added at the beggining of the current month from the previous month
+            const prevMonthDays =
+                new Date(year, month, 1).getDay() === 0
+                    ? 6
+                    : new Date(year, month, 1).getDay() - 1;
+
+            // NOTE: determine how many days must be added at the end of the current month from the next one
+            const nextMonthDays =
+                new Date(year, month + 1, 0).getDay() === 0
+                    ? 7
+                    : new Date(year, month + 1, 0).getDay();
+
+            // NOTE: first week -> add days from prev month
+            if (calendarData.length === 0) {
+                for (let i = 0; i < prevMonthDays; i++) {
+                    weekData.push({
+                        date: subDays(
+                            new Date(year, month, 1),
+                            prevMonthDays - i
+                        ).toISOString(),
+                        checked: false,
+                        isBlocked: true,
+                    });
                 }
             }
 
-            for (let i = processedDays; i < daysInMonth; i++) {
-                const dayOfWeek = new Date(year, month, i + 1).getDay();
+            for (let i = processedDays; i < totalDaysInMonth; i++) {
+                const date = new Date(year, month, i + 1);
+                const isChecked = checkedDays.filter((day) =>
+                    isSameDay(date, new Date(day.date))
+                );
 
                 weekData.push({
-                    day: i + 1,
-                    dayOfWeek,
-                    checked: false,
+                    date: date.toISOString(),
+                    checked: isChecked.length > 0 ? true : false,
                 });
 
                 processedDays += 1;
-                if (dayOfWeek === 0) {
+                if (date.getDay() === 0) {
                     break;
                 }
             }
+
             calendarData.push(weekData);
 
-            if (processedDays >= daysInMonth) {
+            if (processedDays >= totalDaysInMonth) {
+                for (let i = 1; i <= 7 - nextMonthDays; i++) {
+                    weekData.push({
+                        date: new Date(year, month + 1, i).toISOString(),
+                        checked: false,
+                        isBlocked: true,
+                    });
+                }
                 dispatch({ type: 'SET_DATA', payload: calendarData });
                 return;
             }
 
             generateMonth(year, month, processedDays, calendarData);
         },
-        []
+        [checkedDays]
     );
 
     const updateDay = (day, state) => {

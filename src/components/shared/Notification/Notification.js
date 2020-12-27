@@ -67,6 +67,8 @@ export const Color = {
 Notification.propTypes = {
     children: PropTypes.node,
     color: PropTypes.oneOf(Object.keys(Color)),
+    closeHandler: PropTypes.func,
+    autoClose: PropTypes.bool,
 };
 
 export default Notification;

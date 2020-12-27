@@ -8,13 +8,20 @@ import SignIn from './pages/SignIn';
 import { authContext } from './context/auth-context';
 import SignUp from './pages/SignUp';
 import UserProfile from './pages/UserProfile';
+import { dataContext } from './context/data-context';
+import { useAuth } from './hooks/use-auth';
+import { useData } from './hooks/use-data';
 
 function App() {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
-
-    const loginHandler = () => setIsLoggedIn(true);
-    const logoutHandler = () => setIsLoggedIn(false);
+    const {
+        loginHandler,
+        logoutHandler,
+        token,
+        userName,
+        isLoggedIn,
+    } = useAuth();
+    const { data, dispatch, isLoading } = useData(token);
 
     const closeSidebarHandler = useCallback(() => setSidebarOpen(false), []);
     const openSidebarHandler = () => setSidebarOpen(true);
@@ -54,21 +61,25 @@ function App() {
     }
 
     return (
-        <>
-            {isLoggedIn && (
-                <Sidebar
-                    closeSidebarHandler={closeSidebarHandler}
-                    isSidebarOpen={isSidebarOpen}
-                    logoutHandler={logoutHandler}
-                />
-            )}
+        <dataContext.Provider
+            value={{ habits: data.habits, dispatch, isLoading }}
+        >
             <authContext.Provider
                 value={{
                     isLoggedIn,
                     login: loginHandler,
                     logout: logoutHandler,
+                    user: userName,
+                    token,
                 }}
             >
+                {isLoggedIn && (
+                    <Sidebar
+                        closeSidebarHandler={closeSidebarHandler}
+                        isSidebarOpen={isSidebarOpen}
+                        logoutHandler={logoutHandler}
+                    />
+                )}
                 <sidebarContext.Provider
                     value={{
                         isSidebarOpen,
@@ -79,7 +90,7 @@ function App() {
                     {routes}
                 </sidebarContext.Provider>
             </authContext.Provider>
-        </>
+        </dataContext.Provider>
     );
 }
 

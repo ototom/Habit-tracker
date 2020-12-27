@@ -12,6 +12,7 @@ const Input = (props) => {
                 onBlur={props.onBlur}
                 disabled={props.disabled}
                 value={props.value}
+                defaultValue={props.defaultValue}
             />
         ) : (
             <input
@@ -23,6 +24,7 @@ const Input = (props) => {
                 onBlur={props.onBlur}
                 disabled={props.disabled}
                 value={props.value}
+                defaultValue={props.defaultValue}
             />
         );
     return (
@@ -62,6 +64,7 @@ Input.propTypes = {
     disabled: PropTypes.bool,
     type: PropTypes.string,
     value: PropTypes.string,
+    defaultValue: PropTypes.string,
 };
 
 export default Input;
