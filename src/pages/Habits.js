@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import AddNewHabit from '../components/Habit/AddNewHabit';
 import Habit from '../components/Habit/Habit';
-import Datepicker from '../components/shared/DatePicker/Datepicker';
+import Datepicker from '../components/shared/Datepicker/Datepicker';
 import LoadingInline from '../components/shared/LoadingInline/LoadingInline';
 import PageHeader from '../components/shared/PageHeader/PageHeader';
 import { dataContext } from '../context/data-context';
