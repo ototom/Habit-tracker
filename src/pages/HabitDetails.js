@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Calendar from '../components/Calendar/Calendar';
 import { useCalendar } from '../hooks/use-calendar';
-import Datepicker from '../components/shared/DatePicker/Datepicker';
+import Datepicker from '../components/shared/Datepicker/Datepicker';
 import PageHeader from '../components/shared/PageHeader/PageHeader';
 import { authContext } from '../context/auth-context';
 import { info } from '../components/shared/Notification';
