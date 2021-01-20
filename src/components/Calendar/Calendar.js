@@ -12,7 +12,7 @@ const Calendar = ({ data, updateDay, id }) => {
     const { width } = useWindowWidth();
     const { token } = useContext(authContext);
     const { dispatch } = useContext(dataContext);
-    const { sendRequest } = useRequest(false);
+    const { sendRequest, setIsLoading } = useRequest(false);
 
     const markDayHandler = async (e) => {
         if (e.target.classList.contains('blocked')) return;
@@ -35,6 +35,7 @@ const Calendar = ({ data, updateDay, id }) => {
                     date: e.target.dataset.date,
                 },
             });
+            setIsLoading(false);
         });
     };
 

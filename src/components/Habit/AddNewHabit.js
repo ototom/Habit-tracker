@@ -12,7 +12,7 @@ const AddNewHabit = () => {
     const [isFormActive, setIsFormActive] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const inputRef = useRef();
-    const { sendRequest } = useRequest(false);
+    const { sendRequest, setIsLoading } = useRequest(false);
 
     const openFormHandler = () => setIsFormActive(true);
     const closeFormHandler = () => setIsFormActive(false);
@@ -39,6 +39,7 @@ const AddNewHabit = () => {
                 value: 'ADD',
                 payload: { ...data.habit },
             });
+            setIsLoading(false);
         } catch (error) {}
     };
 

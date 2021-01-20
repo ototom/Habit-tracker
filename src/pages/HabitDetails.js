@@ -22,7 +22,7 @@ const HabitDetails = () => {
     const [habit, setHabit] = useState({ checkedDays: [] });
     const [isEditMode, setIsEditMode] = useState(false);
     const [isConfirmActive, setIsConfirmActive] = useState(false);
-    const { sendRequest } = useRequest(false);
+    const { sendRequest, setIsLoading } = useRequest(false);
 
     const { calendar, setDate, date, updateDay } = useCalendar(
         new Date(),
@@ -42,6 +42,7 @@ const HabitDetails = () => {
             info(data.message, true);
             setIsConfirmActive(false);
             dispatch({ value: 'DELETE', payload: habitId });
+            setIsLoading(false);
         } catch (error) {}
     };
 

@@ -11,7 +11,7 @@ import './Auth.scss';
 import { useRequest } from '../hooks/use-request';
 
 const SignIn = () => {
-    const { sendRequest } = useRequest(false);
+    const { sendRequest, setIsLoading } = useRequest(true);
     const auth = useContext(authContext);
     const formik = useFormik({
         initialValues: {
@@ -26,6 +26,7 @@ const SignIn = () => {
                 });
 
                 success('You have been logged in', true);
+                setIsLoading(false);
                 auth.login(data);
             } catch (error) {}
         },

@@ -8,7 +8,7 @@ import { success } from '../components/shared/Notification';
 import { useRequest } from '../hooks/use-request';
 
 const SignUp = () => {
-    const { sendRequest } = useRequest(true);
+    const { sendRequest, setIsLoading } = useRequest(true);
 
     const formik = useFormik({
         initialValues: {
@@ -24,6 +24,7 @@ const SignUp = () => {
                 });
 
                 success('You have been signed up', true);
+                setIsLoading(false);
             } catch (error) {}
         },
         validate: (values) => {

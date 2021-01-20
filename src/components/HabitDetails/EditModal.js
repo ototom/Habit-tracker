@@ -16,7 +16,7 @@ const EditModal = ({
     habit,
 }) => {
     const [inputValue, setInputValue] = useState('');
-    const { sendRequest } = useRequest(false);
+    const { sendRequest, setIsLoading } = useRequest(false);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -38,6 +38,7 @@ const EditModal = ({
                 value: 'CHANGE_NAME',
                 payload: { habitId, name: inputValue },
             });
+            setIsLoading(false);
         } catch (error) {}
     };
 

@@ -11,7 +11,7 @@ const Habit = ({ name, days, id, date }) => {
     const [isChecked, setIsChecked] = useState(false);
     const { token } = useContext(authContext);
     const { dispatch } = useContext(dataContext);
-    const { sendRequest } = useRequest(false);
+    const { sendRequest, setIsLoading } = useRequest(false);
 
     const checkHandler = async () => {
         dispatch({
@@ -29,6 +29,8 @@ const Habit = ({ name, days, id, date }) => {
                 token,
                 body: { habitId: id, date: date.toISOString() },
             });
+
+            setIsLoading(false);
         } catch (error) {}
     };
 

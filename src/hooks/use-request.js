@@ -46,16 +46,15 @@ export const useRequest = (showLoadingNotification = true) => {
                     throw new Error(data.message);
                 }
 
-                setIsLoading(false);
                 return data;
             } catch (error) {
-                setIsLoading(false);
                 danger(error.message);
+                setIsLoading(false);
                 throw error;
             }
         },
         [setIsLoading, showLoadingNotification]
     );
 
-    return { sendRequest, isLoading };
+    return { sendRequest, isLoading, setIsLoading };
 };

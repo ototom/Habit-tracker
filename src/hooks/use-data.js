@@ -54,7 +54,7 @@ const dataReducer = (state, action) => {
 
 export const useData = (token) => {
     const [data, dispatch] = useReducer(dataReducer, { habits: [] });
-    const { sendRequest, isLoading } = useRequest(true);
+    const { sendRequest, isLoading, setIsLoading } = useRequest(true);
 
     useEffect(() => {
         if (!token) {
@@ -65,11 +65,12 @@ export const useData = (token) => {
             try {
                 const data = await sendRequest('habit', { token, headers: {} });
                 dispatch({ value: 'SET', payload: data.habits });
+                setIsLoading(false);
             } catch (error) {}
         };
 
         fetchData();
-    }, [token, sendRequest]);
+    }, [token, sendRequest, setIsLoading]);
 
     return { data, dispatch, isLoading };
 };
