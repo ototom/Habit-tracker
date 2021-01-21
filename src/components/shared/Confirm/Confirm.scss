@@ -8,6 +8,8 @@
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
     border-radius: 0.7rem;
     z-index: 120;
+    width: 80vw;
+    max-width: 500px;
 
     &__content {
         padding: 1rem 0 2rem 0;
@@ -25,5 +27,11 @@
     &--fade-out {
         animation: fadeout 0.15s ease-out;
         animation-fill-mode: forwards;
+    }
+}
+
+@media (min-width: 768px) {
+    .confirm {
+        width: 40vw;
     }
 }
