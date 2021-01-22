@@ -10,9 +10,9 @@ import { dataContext } from '../context/data-context';
 import Confirm from '../components/shared/Confirm/Confirm';
 import { useHistory } from 'react-router-dom';
 import { addMonths, subMonths } from 'date-fns';
-import Badge from '../components/shared/Badge/Badge';
 import EditModal from '../components/HabitDetails/EditModal';
 import { useRequest } from '../hooks/use-request';
+import Summary from '../components/HabitDetails/Summary';
 
 const HabitDetails = () => {
     const habitId = useParams().id;
@@ -97,29 +97,11 @@ const HabitDetails = () => {
                 </div>
                 <div className='col-6-sm col-2-xl '>
                     <div className='row row--no-margin'>
-                        <div className='col-6-sm col-3-md col-6-xl box'>
-                            <div className='box__header'>
-                                <h2>
-                                    Summary <Badge>Soon!</Badge>
-                                </h2>
-                            </div>
-                            <div className='box__content'>
-                                <ul className='summary-list'>
-                                    <li>
-                                        Total check in's:
-                                        <span className='summary-list__value'>
-                                            {habit.checkedDays.length}
-                                        </span>
-                                    </li>
-                                    <li>
-                                        Monthly progress:
-                                        <span className='summary-list__value'>
-                                            89% (30/31)
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <Summary
+                            selectedDate={date}
+                            currentDate={new Date()}
+                            checkedDays={habit.checkedDays}
+                        />
                         <div className='col-6-sm col-3-md col-6-xl box'>
                             <div className='box__header'>
                                 <h2>Manage</h2>
