@@ -17,7 +17,7 @@ import Summary from '../components/HabitDetails/Summary';
 const HabitDetails = () => {
     const habitId = useParams().id;
     const history = useHistory();
-    const { habits, dispatch } = useContext(dataContext);
+    const { habits, dispatch, getSummary } = useContext(dataContext);
     const { token } = useContext(authContext);
     const [habit, setHabit] = useState({ checkedDays: [] });
     const [isEditMode, setIsEditMode] = useState(false);
@@ -99,8 +99,8 @@ const HabitDetails = () => {
                     <div className='row row--no-margin'>
                         <Summary
                             selectedDate={date}
-                            currentDate={new Date()}
-                            checkedDays={habit.checkedDays}
+                            id={habitId}
+                            getSummary={getSummary}
                         />
                         <div className='col-6-sm col-3-md col-6-xl box'>
                             <div className='box__header'>

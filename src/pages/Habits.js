@@ -10,7 +10,7 @@ import { useWindowWidth } from '../hooks/use-window-width';
 import { addDays, subDays } from 'date-fns';
 
 const Habits = () => {
-    const { habits, isLoading } = useContext(dataContext);
+    const { habits, isLoading, getSummary } = useContext(dataContext);
     const { width } = useWindowWidth();
     const [date, setDate] = useState(new Date());
 
@@ -52,15 +52,20 @@ const Habits = () => {
                     )}
 
                     {habits.length > 0 ? (
-                        habits.map((habit) => (
-                            <Habit
-                                name={habit.name}
-                                key={habit._id}
-                                id={habit._id}
-                                days={habit.checkedDays}
-                                date={date}
-                            />
-                        ))
+                        habits.map((habit) => {
+                            const summary = getSummary(habit._id, date);
+
+                            return (
+                                <Habit
+                                    name={habit.name}
+                                    key={habit._id}
+                                    id={habit._id}
+                                    days={habit.checkedDays}
+                                    date={date}
+                                    summary={summary}
+                                />
+                            );
+                        })
                     ) : isLoading ? (
                         <LoadingInline
                             isLoading={isLoading}

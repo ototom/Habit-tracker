@@ -1,5 +1,5 @@
-import { useReducer, useEffect } from 'react';
-import { isSameDay, parseISO } from 'date-fns';
+import { useReducer, useEffect, useCallback } from 'react';
+import { isSameDay, isSameMonth, parseISO } from 'date-fns';
 import { useRequest } from './use-request';
 
 const dataReducer = (state, action) => {
@@ -72,5 +72,25 @@ export const useData = (token) => {
         fetchData();
     }, [token, sendRequest, setIsLoading]);
 
-    return { data, dispatch, isLoading };
+    const getSummary = useCallback(
+        (id, date = new Date()) => {
+            const habit = data.habits.filter((habit) => habit._id === id);
+
+            const currentMonth = habit[0].checkedDays.filter((day) =>
+                isSameMonth(parseISO(day.date), new Date())
+            );
+
+            const selectedMonth = habit[0].checkedDays.filter((day) =>
+                isSameMonth(parseISO(day.date), date)
+            );
+            return {
+                total: habit[0].checkedDays.length,
+                currentMonth: currentMonth.length,
+                selectedMonth: selectedMonth.length,
+            };
+        },
+        [data]
+    );
+
+    return { data, getSummary, dispatch, isLoading };
 };

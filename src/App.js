@@ -21,7 +21,7 @@ function App() {
         userName,
         isLoggedIn,
     } = useAuth();
-    const { data, dispatch, isLoading } = useData(token);
+    const { data, dispatch, isLoading, getSummary } = useData(token);
 
     const closeSidebarHandler = useCallback(() => setSidebarOpen(false), []);
     const openSidebarHandler = () => setSidebarOpen(true);
@@ -62,7 +62,7 @@ function App() {
 
     return (
         <dataContext.Provider
-            value={{ habits: data.habits, dispatch, isLoading }}
+            value={{ habits: data.habits, dispatch, isLoading, getSummary }}
         >
             <authContext.Provider
                 value={{

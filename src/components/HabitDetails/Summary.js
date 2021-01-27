@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getDaysInMonth, isSameMonth, parseISO } from 'date-fns';
+import { getDaysInMonth } from 'date-fns';
 
-const Summary = ({ checkedDays, currentDate, selectedDate }) => {
-    const [selectedMonthChecked, setSelectedMonthChecked] = useState([]);
-    const [currentMonthChecked, setCurrentMonthChecked] = useState([]);
+const Summary = ({ id, selectedDate, getSummary }) => {
+    const [summary, setSummary] = useState({
+        total: 0,
+        selectedMonth: 0,
+        currentMonth: 0,
+    });
 
     useEffect(() => {
-        const selectedMonthFilteredArr = checkedDays.filter((day) =>
-            isSameMonth(parseISO(day.date), selectedDate)
-        );
-        const currentMonthFilteredArr = checkedDays.filter((day) =>
-            isSameMonth(parseISO(day.date), currentDate)
-        );
+        const habitSummary = getSummary(id, selectedDate);
 
-        setSelectedMonthChecked(selectedMonthFilteredArr);
-        setCurrentMonthChecked(currentMonthFilteredArr);
-    }, [checkedDays, currentDate, selectedDate]);
+        setSummary(habitSummary);
+    }, [getSummary, id, selectedDate]);
 
     return (
         <div className='col-6-sm col-3-md col-6-xl box'>
@@ -28,18 +25,18 @@ const Summary = ({ checkedDays, currentDate, selectedDate }) => {
                     <li>
                         Total check in's:
                         <span className='summary-list__value'>
-                            {checkedDays.length}
+                            {summary.total}
                         </span>
                     </li>
                     <li>
                         Selected month progress:
                         <span className='summary-list__value'>
                             {Math.round(
-                                (selectedMonthChecked.length /
+                                (summary.selectedMonth /
                                     getDaysInMonth(selectedDate)) *
                                     100
                             )}
-                            % ({selectedMonthChecked.length}/
+                            % ({summary.selectedMonth}/
                             {getDaysInMonth(selectedDate)})
                         </span>
                     </li>
@@ -47,12 +44,12 @@ const Summary = ({ checkedDays, currentDate, selectedDate }) => {
                         Current month progress:
                         <span className='summary-list__value'>
                             {Math.round(
-                                (currentMonthChecked.length /
-                                    getDaysInMonth(currentDate)) *
+                                (summary.currentMonth /
+                                    getDaysInMonth(new Date())) *
                                     100
                             )}
-                            % ({currentMonthChecked.length}/
-                            {getDaysInMonth(currentDate)})
+                            % ({summary.currentMonth}/
+                            {getDaysInMonth(new Date())})
                         </span>
                     </li>
                 </ul>
@@ -62,8 +59,8 @@ const Summary = ({ checkedDays, currentDate, selectedDate }) => {
 };
 
 Summary.propTypes = {
-    checkedDays: PropTypes.array,
-    currentDate: PropTypes.object,
+    id: PropTypes.string,
+    getSummary: PropTypes.func,
     selectedDate: PropTypes.object,
 };
 

@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Habit.scss';
-import { isSameDay, parseISO } from 'date-fns';
+import { getDaysInMonth, isSameDay, parseISO } from 'date-fns';
 import { authContext } from '../../context/auth-context';
 import { dataContext } from '../../context/data-context';
 import { useRequest } from '../../hooks/use-request';
 
-const Habit = ({ name, days, id, date }) => {
+const Habit = ({ name, days, id, date, summary }) => {
     const [isChecked, setIsChecked] = useState(false);
     const { token } = useContext(authContext);
     const { dispatch } = useContext(dataContext);
@@ -58,7 +58,9 @@ const Habit = ({ name, days, id, date }) => {
             <div className='habit__title'>
                 <Link to={`/habit/${id}`}>{name}</Link>
             </div>
-            <div className='habit__details'>{days.length}/30</div>
+            <div className='habit__details'>
+                {summary.selectedMonth}/{getDaysInMonth(date)}
+            </div>
         </section>
     );
 };
